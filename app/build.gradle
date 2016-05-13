@@ -1,21 +1,13 @@
 apply plugin: 'com.android.application'
 
-def VUFORIA_SDK_DIR = '../../..'
-def NATIVE_LIB_DIR = 'build/lib'
-def JAR_DIR = 'build/java/vuforia'
 
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
 
-    sourceSets.main {
-        jni.srcDirs = []
-        jniLibs.srcDir "$VUFORIA_SDK_DIR/$NATIVE_LIB_DIR/"
-    }
-
     defaultConfig {
         applicationId "com.vuforia.samples.VuforiaSamples"
-        minSdkVersion 8
+        minSdkVersion 14
         targetSdkVersion 22
         versionCode 200
         versionName "5.0"
@@ -42,4 +34,5 @@ android {
 
 dependencies {
     compile files('src/main/libs/Vuforia.jar')
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.15'
 }
