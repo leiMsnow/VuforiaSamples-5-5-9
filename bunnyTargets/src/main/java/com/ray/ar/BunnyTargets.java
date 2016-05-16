@@ -98,12 +98,20 @@ public class BunnyTargets extends Activity implements SampleApplicationControl {
     private String pageName[] = new String[]{
             "Cover", "Page01", "Page02", "Page03", "Page04"
     };
-    private int gifs[] = new int[]{
-            R.drawable.monkey_eat
-            , R.drawable.monkey_wink
-            , R.drawable.monkey_new_year
-            , R.drawable.monkey_hungry
+    //    private int gifs[] = new int[]{
+//            R.drawable.monkey_eat
+//            , R.drawable.monkey_wink
+//            , R.drawable.monkey_new_year
+//            , R.drawable.monkey_hungry
+//            , R.drawable.monkey_reading
+//    };
+    private int banner[] = new int[]{
+            R.mipmap.ar1
+            , R.mipmap.ar3
             , R.drawable.monkey_reading
+            , R.mipmap.ar4
+            , R.mipmap.ar5
+
     };
     MyOrientationDetector myOrientationDetector;
 
@@ -176,6 +184,8 @@ public class BunnyTargets extends Activity implements SampleApplicationControl {
         mTextures.add(Texture.loadTextureFromApk("TextureTeapotBlue.png",
                 getAssets()));
         mTextures.add(Texture.loadTextureFromApk("TextureTeapotRed.png",
+                getAssets()));
+        mTextures.add(Texture.loadTextureFromApk("ImageTargets/Buildings.jpeg",
                 getAssets()));
     }
 
@@ -292,7 +302,7 @@ public class BunnyTargets extends Activity implements SampleApplicationControl {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                mGifImageView.setImageResource(gifs[temp]);
+                                mGifImageView.setImageResource(banner[temp]);
                                 setGifAnimator(0, 1);
                             }
                         });
@@ -321,10 +331,12 @@ public class BunnyTargets extends Activity implements SampleApplicationControl {
                 , View.SCALE_X, start, end);
         ObjectAnimator SCALE_Y = ObjectAnimator.ofFloat(mGifImageView
                 , View.SCALE_Y, start, end);
+        ObjectAnimator ROTATION = ObjectAnimator.ofFloat(mGifImageView
+                , View.ROTATION, mGifImageView.getRotation(), 360);
 
         AnimatorSet an = new AnimatorSet();
-        an.playTogether(SCALE_X, SCALE_Y);
-        an.setDuration(1000);
+        an.playTogether(SCALE_X, SCALE_Y, ROTATION);
+        an.setDuration(1500);
         an.start();
     }
 
@@ -339,6 +351,7 @@ public class BunnyTargets extends Activity implements SampleApplicationControl {
             if (orientation == OrientationEventListener.ORIENTATION_UNKNOWN) {
                 return; // 手机平放时，检测不到有效的角度
             }
+
             // 只检测是否有四个角度的改变
             if (orientation > 350 || orientation < 10) { // 0度
                 orientation = 0;
@@ -351,10 +364,10 @@ public class BunnyTargets extends Activity implements SampleApplicationControl {
             } else {
                 return;
             }
-
             ObjectAnimator animator = ObjectAnimator.ofFloat(mGifImageView, View.ROTATION,
                     mGifImageView.getRotation(), -orientation);
             animator.start();
+
         }
     }
 

@@ -14,8 +14,8 @@
 
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gif_view"
-        android:layout_width="192dp"
-        android:layout_height="192dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="96dp"/>
